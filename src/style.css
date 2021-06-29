@@ -1,0 +1,57 @@
+/* Reset Select */
+._k_custom_select_one select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #0d894d;
+  background-image: none;
+}
+/* Remove IE arrow */
+._k_custom_select_one select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+._k_custom_select_one {
+  position: relative;
+  display: flex;
+  width: 7.3em;
+  height: 2.4em;
+  line-height: 2.4;
+  background: #0da15a;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+._k_custom_select_one select {
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+._k_custom_select_one::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 0.7em;
+  color: white;
+  background: #0da15a;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: 0.25s all ease;
+  -o-transition: 0.25s all ease;
+  transition: 0.25s all ease;
+}
+/* Transition */
+._k_custom_select_one:hover::after {
+  color: rgb(212, 208, 208);
+}
+
+._k_custom_select_one option {
+  background: rgba(219, 209, 209, 0.3);
+  color: #fff;
+}
