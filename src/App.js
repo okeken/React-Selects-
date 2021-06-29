@@ -32,7 +32,7 @@ const MySelect = props => {
 
   return (
     <ResetSelect getChildrenDom={() => grabChildValue(ref)}>
-      <div class="_k_custom_select_one">
+      <div className="_k_custom_select_one">
         <select onChange={selectOption} ref={ref}>
           <option>actions</option>
           {props.children}
