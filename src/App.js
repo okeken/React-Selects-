@@ -1,11 +1,12 @@
 import React, { forwardRef, useState } from 'react';
 import './style.css';
 
-const ResetSelect = forwardRef((props, ref) => {
-  const { children, getChildrenDom } = props;
-  const handleRes = () => {
-    let childDom = getChildrenDom();
-    const node = childDom.current;
+const ResetSelect = props => {
+  const ref = React.useRef();
+  const { onChange, defaultLabel = 'Actions', ...otherProps } = props;
+  const selectOption = e => {
+    let childDom = ref.current;
+    const node = childDom;
     const resetValue = () => {
       let options = node.options;
       for (var i = 0; i < options.length; i++) {
@@ -13,47 +14,31 @@ const ResetSelect = forwardRef((props, ref) => {
       }
     };
     setTimeout(resetValue, 10);
+    onChange(e);
   };
 
   return (
     <>
-      <div ref={ref} onClick={handleRes}>
-        {children}
-      </div>
+      <select onChange={selectOption} ref={ref} {...otherProps}>
+        <option>{defaultLabel}</option>
+        {props.children}
+      </select>
     </>
-  );
-});
-
-const MySelect = props => {
-  const ref = React.useRef();
-  const { getValue } = props;
-  const selectOption = e => getValue(e.target.value);
-  const grabChildValue = e => e;
-
-  return (
-    <ResetSelect getChildrenDom={() => grabChildValue(ref)}>
-      <div className="_k_custom_select_one">
-        <select onChange={selectOption} ref={ref}>
-          <option>actions</option>
-          {props.children}
-        </select>
-      </div>
-    </ResetSelect>
   );
 };
 
 export default function App() {
-  const handleValue = value => {
-    console.log('value', value);
+  const handleValue = e => {
+    console.log('value', e.target.value);
   };
 
   return (
-    <div>
-      <MySelect getValue={handleValue}>
+    <div className='_k_custom_select_one' >
+      <ResetSelect onChange={e => handleValue(e)}>
         <option value="view">view</option>
         <option value="delete">delete</option>
         <option value="edit">edit</option>
-      </MySelect>
+      </ResetSelect>
     </div>
   );
 }
